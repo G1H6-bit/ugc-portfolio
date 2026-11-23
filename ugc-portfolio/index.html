@@ -5,7 +5,7 @@
   <!-- viewport-fit=cover lets the page fill the whole phone screen -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Creator Portfolio + Media Kit</title>
-  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Josefin+Sans:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Josefin+Sans:wght@300;400;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,16 +20,16 @@
   <!-- ===== HERO: change "Your Name" to the real name ===== -->
   <section id="home" class="band-sky">
     <div class="hero">
-      <div>
-        <div class="arch"></div>
+      <div class="arch-wrap"><div class="arch"></div></div>
+      <div class="hero-text">
+        <div class="nameblob">
+          <span class="script">Hi I’m</span>
+          <h1>Your Name</h1>
+          <p>UGC CREATOR + CURLY HAIR CONTENT</p>
+        </div>
         <div class="facts">🌀 Curly hair + beauty content<br><span data-stat="total"></span> brand collaborations<br><span data-stat="intl"></span> international brands</div>
+        <div class="pills"><a class="pill" href="#hair">Portfolio</a><a class="pill" href="#analytics">Media Kit</a><a class="pill" href="#contact">Contact</a></div>
       </div>
-      <div class="nameblob">
-        <span class="script">Hi I’m</span>
-        <h1>Your Name</h1>
-        <p>UGC CREATOR + CURLY HAIR CONTENT</p>
-      </div>
-      <div class="pills"><a class="pill" href="#hair">Portfolio</a><a class="pill" href="#analytics">Media Kit</a><a class="pill" href="#contact">Contact</a></div>
     </div>
   </section>
 
@@ -50,18 +50,30 @@
     <div class="brands" id="brand-list"></div>
   </section>
 
-  <!-- ===== GALLERY ===== -->
+  <!-- ===== GALLERY: 3 featured arches over a moving word, then the rest ===== -->
   <section id="gallery" class="band-sky">
     <div class="head"><div class="mono">YN</div><h2>moments</h2><p><span class="script">behind</span> the curls: events, trips and brand days</p></div>
-    <div class="gallery">
-      <figure><img src="images/gallery-1.jpg" alt="Eva Senses event" loading="lazy"><figcaption>Eva Senses event</figcaption></figure>
-      <figure><img src="images/gallery-2.jpg" alt="Roody50X Trail Race" loading="lazy"><figcaption>Roody50X Trail Race</figcaption></figure>
-      <figure><img src="images/gallery-3.jpg" alt="Be Expo" loading="lazy"><figcaption>Be Expo</figcaption></figure>
-      <figure><img src="images/gallery-4.jpg" alt="Beach day" loading="lazy"><figcaption>Beach day</figcaption></figure>
-      <figure><img src="images/gallery-5.jpg" alt="Garden walk" loading="lazy"><figcaption>Garden walk</figcaption></figure>
-      <figure class="wide"><img src="images/gallery-6.jpg" alt="Park smiles" loading="lazy"><figcaption>Park smiles</figcaption></figure>
-      <figure><img src="images/gallery-7.jpg" alt="Handmade crochet bag" loading="lazy"><figcaption>Handmade crochet bag</figcaption></figure>
-      <figure><img src="images/gallery-8.jpg" alt="Expo visit" loading="lazy"><figcaption>Expo visit</figcaption></figure>
+
+    <div class="stage">
+      <!-- the big moving word behind the photos: change the text in each <span> -->
+      <div class="stage-word" aria-hidden="true">
+        <div class="marquee">
+          <span>Curly With Roma</span><span>Curly With Roma</span><span>Curly With Roma</span><span>Curly With Roma</span>
+        </div>
+      </div>
+      <div class="stage-row">
+        <figure class="acard"><img src="images/gallery-1.jpg" alt="Eva Senses event" loading="lazy"><figcaption>Eva Senses event</figcaption></figure>
+        <figure class="acard"><img src="images/gallery-2.jpg" alt="Roody50X Trail Race" loading="lazy"><figcaption>Roody50X Trail Race</figcaption></figure>
+        <figure class="acard"><img src="images/gallery-3.jpg" alt="Be Expo" loading="lazy"><figcaption>Be Expo</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="more">
+      <figure class="acard"><img src="images/gallery-4.jpg" alt="Beach day" loading="lazy"><figcaption>Beach day</figcaption></figure>
+      <figure class="acard"><img src="images/gallery-5.jpg" alt="Garden walk" loading="lazy"><figcaption>Garden walk</figcaption></figure>
+      <figure class="acard"><img src="images/gallery-6.jpg" alt="Park smiles" loading="lazy"><figcaption>Park smiles</figcaption></figure>
+      <figure class="acard"><img src="images/gallery-7.jpg" alt="Handmade crochet bag" loading="lazy"><figcaption>Handmade crochet bag</figcaption></figure>
+      <figure class="acard"><img src="images/gallery-8.jpg" alt="Expo visit" loading="lazy"><figcaption>Expo visit</figcaption></figure>
     </div>
   </section>
 

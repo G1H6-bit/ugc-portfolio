@@ -123,17 +123,34 @@ document.getElementById("donuts").innerHTML =
 // Social icons
 document.querySelectorAll("[data-icon]").forEach((el) => (el.innerHTML = ICONS[el.dataset.icon]));
 
-/* ---------- 4. TAP-TO-PLAY VIDEOS ---------- */
+/* ---------- 4. TAP-TO-PLAY VIDEOS + SERVICES SWAP ---------- */
 // Tap a phone to play or pause; starting one video pauses the others.
+// In the Services section, tapping the BACK phone brings it to the front instead.
 const screens = document.querySelectorAll(".screen");
+
+function stopVideo(screen) {
+  screen.querySelector("video").pause();
+  screen.classList.remove("playing");
+}
+
+function swapServicesPhones(backPhone) {
+  const frontPhone = backPhone.parentElement.querySelector(".phone.front");
+  if (!frontPhone) return;
+  backPhone.classList.replace("back", "front");
+  frontPhone.classList.replace("front", "back");
+  stopVideo(frontPhone.querySelector(".screen"));   // the phone going to the back stops playing
+}
+
 screens.forEach((screen) => {
   const video = screen.querySelector("video");
   screen.addEventListener("click", () => {
-    if (!video.paused) { video.pause(); screen.classList.remove("playing"); return; }
-    screens.forEach((other) => {
-      other.querySelector("video").pause();
-      other.classList.remove("playing");
-    });
+    const phone = screen.closest(".phone");
+    if (phone.closest(".duo2") && phone.classList.contains("back")) {
+      swapServicesPhones(phone);
+      return;
+    }
+    if (!video.paused) { stopVideo(screen); return; }
+    screens.forEach(stopVideo);
     video.play().then(() => screen.classList.add("playing")).catch(() => {});
   });
   video.addEventListener("ended", () => screen.classList.remove("playing"));
