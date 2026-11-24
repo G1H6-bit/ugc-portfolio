@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="blush">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport-fit=cover lets the page fill the whole phone screen -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6ece2">
+  <title>Roma Ramy | UGC Creator Portfolio + Media Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Josefin+Sans:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/gate.js"></script>
+
+</head>
+<body>
+
+  <!-- ===== ENTRANCE ANIMATION (plays once per visit; see css/style.css and js/intro.js) ===== -->
+  <div class="intro" id="intro" aria-label="Site intro">
+    <div class="i-glow i-g1"></div><div class="i-glow i-g2"></div>
+  
+    <!-- Step 1: countdown -->
+    <div class="i-count" aria-hidden="true"><i></i><i></i><i></i><i></i>
+      <div class="i-rec"><b></b>REC</div>
+      <span class="i-num i-n3">C<small>Curly</small></span><span class="i-num i-n2">W<small>With</small></span><span class="i-num i-n1">R<small>Roma</small></span>
+      <div class="i-phrase"><b>C</b>urly <span class="i-with"><b>W</b>ith</span> <b>R</b>oma</div></div>
+    <div class="i-flash"></div>
+  
+    <!-- Step 2: 3D scene (phone + ring of videos + floating symbols) -->
+    <div class="i-scene">
+      <div class="i-layer i-back"><div class="i-tilt"><div class="i-stage"><div class="i-rw" id="rwBack"></div><div class="i-parts" id="partsBack"></div></div></div></div>
+      <div class="i-layer i-mid"><div class="i-tilt"><div class="i-stage">
+      <div class="i-phoneWrap"><div class="i-phone">
+        <div class="i-f i-pl"></div><div class="i-f i-pr"></div><div class="i-f i-pt"></div><div class="i-f i-pbm"></div>
+        <div class="i-f i-pf"><div class="i-screen">
+          <video id="vid" muted playsinline loop preload="auto"></video>
+          <div class="i-ui"><div class="i-tp"><span><b></b>REC</span><span>UGC</span></div>
+            <div class="i-side"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7h2C14 6.1 15.6 5 17.6 5 21 5 23.100 8.400 21.600 11.800 19.500 16.400 12 21 12 21z"/></svg><svg viewBox="0 0 24 24"><path d="M3 4h18v12H9l-6 5z"/></svg><svg viewBox="0 0 24 24"><path d="M3 11l18-8-6 18-3-8z"/></svg></div>
+            <div><h4>Roma Ramy</h4><small>UGC creator</small><div class="i-bar"><i></i></div></div></div>
+        </div></div>
+      </div></div>
+      </div></div></div>
+      <div class="i-layer i-front"><div class="i-tilt"><div class="i-stage"><div class="i-rw" id="rwFront"></div><div class="i-parts" id="partsFront"></div></div></div></div>
+    </div>
+  
+    <!-- Step 3: title + enter -->
+    <div class="i-hero"><span class="i-hi">Hi, I’m</span><h2>Roma Ramy</h2><p>UGC creator · curly hair + beauty</p><button id="enter">Enter the site →</button></div>
+    <button id="skip">Skip ›</button>
+  </div>
+
+  <!-- ===== NAVIGATION: each link jumps to the section with the same id ===== -->
+  <nav>
+    <a href="#home">Home</a><a href="#hair">Portfolio – Hair</a><a href="#life">Portfolio – Lifestyle</a>
+    <a href="#brands">Brands</a><a href="#gallery">Gallery</a>
+    <a href="#analytics">Media Kit</a><a href="#services">Services</a><a href="#contact">Contact Me</a>
+  </nav>
+
+  <!-- ===== HERO: change "Roma Ramy" to the real name ===== -->
+  <section id="home" class="band-sky">
+    <div class="hero">
+      <div class="arch-wrap"><div class="arch"></div></div>
+      <div class="hero-text">
+        <div class="nameblob">
+          <span class="script">Hi I’m</span>
+          <h1>Roma Ramy</h1>
+          <p>UGC CREATOR + CURLY HAIR CONTENT</p>
+        </div>
+        <div class="facts">🌀 Curly hair + beauty content<br><span data-stat="total"></span> brand collaborations<br><span data-stat="intl"></span> international brands</div>
+        <div class="pills"><a class="pill" href="#hair">Portfolio</a><a class="pill" href="#analytics">Media Kit</a><a class="pill" href="#contact">Contact</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO ROWS: phones are built by js/main.js from the VIDEOS list ===== -->
+  <section id="hair" class="band-sand">
+    <div class="head"><h2>hair care</h2><p><span class="script">inspire</span> viewers to love their natural curls</p></div>
+    <div class="phones" data-row="hair"></div>
+  </section>
+
+  <section id="life" class="band-sky">
+    <div class="head"><h2>lifestyle</h2><p><span class="script">connect</span> with viewers through real stories</p></div>
+    <div class="phones" data-row="life"></div>
+  </section>
+
+  <!-- ===== BRANDS: chips are built from the BRANDS list ===== -->
+  <section id="brands" class="band-sand">
+    <div class="head"><h2>brands</h2><p><span class="script">trusted</span> by <span data-stat="total"></span> brands</p></div>
+    <div class="brands" id="brand-list"></div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section id="gallery" class="band-sky">
+    <div class="head"><h2>moments</h2><p><span class="script">behind</span> the curls: events, trips and brand days</p></div>
+
+    <div class="stage">
+      <!-- the big moving word behind the photos: change the text in each <span> -->
+      <div class="stage-word" aria-hidden="true">
+        <div class="marquee">
+          <span>Roma With Curly</span><span>Roma With Curly</span><span>Roma With Curly</span><span>Roma With Curly</span>
+        </div>
+      </div>
+      <div class="stage-row">
+        <figure class="acard"><div class="ph"><img src="images/gallery-1.jpg" alt="Eva Senses event" loading="lazy"></div><figcaption>Eva Senses event</figcaption></figure>
+        <figure class="acard"><div class="ph"><img src="images/gallery-2.jpg" alt="Roody50X Trail Race" loading="lazy"></div><figcaption>Roody50X Trail Race</figcaption></figure>
+        <figure class="acard"><div class="ph"><img src="images/gallery-3.jpg" alt="Be Expo" loading="lazy"></div><figcaption>Be Expo</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="more">
+      <figure class="acard"><div class="ph"><img src="images/gallery-4.jpg" alt="Beach day" loading="lazy"></div><figcaption>Beach day</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-5.jpg" alt="Garden walk" loading="lazy"></div><figcaption>Garden walk</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-6.jpg" alt="Park smiles" loading="lazy"></div><figcaption>Park smiles</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-7.jpg" alt="Handmade crochet bag" loading="lazy"></div><figcaption>Handmade crochet bag</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-8.jpg" alt="Expo visit" loading="lazy"></div><figcaption>Expo visit</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-9.jpg" alt="City walk by the fountain" loading="lazy"></div><figcaption>City walk</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-10.jpg" alt="Booth of Beauty" loading="lazy"></div><figcaption>Booth of Beauty</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-11.jpg" alt="Polaroid picnic by the river" loading="lazy"></div><figcaption>Polaroid picnic</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-12.jpg" alt="Eva Senses World of Fragrances" loading="lazy"></div><figcaption>Eva Senses: World of Fragrances</figcaption></figure>
+      <figure class="acard"><div class="ph"><img src="images/gallery-13.jpg" alt="Starville event" loading="lazy"></div><figcaption>Starville</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ===== MEDIA KIT SUMMARY (numbers are filled in by main.js) ===== -->
+  <section id="analytics" class="paper">
+    <div class="sum">
+      <div><h2>Brand<br>Partnerships</h2><div class="photo"></div></div>
+      <div class="box">
+        <div class="title"><span data-stat="total"></span> BRAND <span class="script">Collab</span> SUMMARY</div>
+        <div><span class="big"><span data-stat="total"></span>+ brands</span><small>Collaborations</small></div>
+        <div><span class="big"><span data-stat="hair"></span> hair</span><small>Hair care brands</small></div>
+        <div><span class="big"><span data-stat="intl"></span> global</span><small>International brands</small></div>
+        <div class="social"><a data-link="instagram" href="#" target="_blank" rel="noopener"><span class="icon" data-icon="instagram"></span><span data-handle="instagram"></span></a><a data-link="tiktok" href="#" target="_blank" rel="noopener"><span class="icon" data-icon="tiktok"></span><span data-handle="tiktok"></span></a></div>
+      </div>
+    </div>
+    <!-- Audience numbers: fill AUDIENCE in the script; the block stays hidden until you do -->
+    <div class="aud" id="audience" hidden></div>
+  </section>
+
+  <div class="banner"><div class="script">Real curls. Real reviews.</div></div>
+
+  <!-- ===== SERVICES: edit the list to the real offers ===== -->
+  <section id="services" class="paper">
+    <div class="serv">
+      <div class="vert">Services</div>
+      <div class="list">
+        <h3>Short Form<br>Content</h3>
+        <p>Product reviews</p><p>Tutorials &amp; demos</p><p>Reels &amp; TikToks</p><p>Stories &amp; static posts</p>
+        <p class="disp rates">Contact for rates</p>
+      </div>
+      <div class="duo2" data-row="services"></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="paper">
+    <div class="conn">
+      
+      <div class="conn-text">
+        <h2>Let's connect &amp;</h2><span class="script">collaborate</span>
+        <!-- Change each href to the real email / Instagram / TikTok -->
+        <div class="icons">
+          <a data-link="email" href="#" aria-label="Email"><span class="icon" data-icon="mail"></span></a>
+          <a data-link="instagram" href="#" aria-label="Instagram" target="_blank" rel="noopener"><span class="icon" data-icon="instagram"></span></a>
+          <a data-link="tiktok" href="#" aria-label="TikTok" target="_blank" rel="noopener"><span class="icon" data-icon="tiktok"></span></a>
+        </div>
+      </div>
+      <div class="archwrap"><div class="archpic"></div></div>
+    </div>
+  </section>
+
+  <footer class="paper">© 2026 Roma Ramy <button id="replay-intro" class="replay">↺ Replay intro</button></footer>
+
+  <script src="js/media-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/intro-data.js"></script>
+  <script src="js/intro.js"></script>
+
+  <script src="js/effects.js"></script>
+</body>
+</html>
