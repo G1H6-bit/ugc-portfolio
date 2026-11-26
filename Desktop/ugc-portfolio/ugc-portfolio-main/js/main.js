@@ -27,7 +27,7 @@ const CONTACT = {
 // Videos live in /videos/video-N.mp4 with a preview picture in /images/posters/poster-N.jpg
 const VIDEOS = {
   1: { title: "Product review",    sub: "Hair care" },
-  2: { title: "Hair talk",         sub: "Beach lifestyle" },
+  2: { title: "Numa focus",         sub: "Creative UGC vid" },
   3: { title: "Product reveal",    sub: "Hair care" },
   4: { title: "Hair tips",         sub: "Hair education" },
   5: { title: "Get ready with me", sub: "Tips & stories" },
@@ -48,15 +48,16 @@ const ROWS = {
 const BRANDS = {
   "Hair care": [
     ["4myhair"], ["Clary"], ["Booth of Beauty"], ["Divol"], ["Curlit"], ["Root to End"], ["Centara"], ["Orb"],
-    ["Curlyana"], ["Shi Curly (Skala)", "", true], ["Uzori"], ["Sunny Isle", "", true], ["So Berry"],
-    ["Zero Frizz"], ["Dusk & Dawn"], ["Lazy Republic"], ["Vatika"],
+    ["Curlyana"], ["Shi Curly (Skala)", "", true], ["Uzuri"], ["Sunny Isle", "", true], ["So Berry"],
+    ["Zero Frizz"], ["Dusk & Dawn"], ["Lazy Republic"], ["Vatika"], ["Tharaa"],
   ],
-  "Skin care": [["Bobbi"], ["Starville"], ["Medicube", "", true], ["Shaan"]],
+  "Skin care": [["Bobai", "sunscreen"], ["Starville"], ["Medicube", "", true], ["Shaan"]],
   "Fashion": [["Bros"], ["Vecoress"], ["Yosy"], ["M.H Handmade"], ["Cozy Nest"]],
   "Wellness & more": [
     ["Amikie", "brushes", true], ["Breathday", "tooth care"], ["Dreamzz", "senses care"],
     ["Numa", "chocolate caffeine"], ["Bloom Ville", "health care"], ["Ginipin", "health care"], ["Eva Senses", "senses care"],
   ],
+  "Marketing": [["Bliphub", "marketing agency"]],
 };
 
 // Social icons (small inline SVGs so no extra files are needed)
@@ -97,6 +98,7 @@ document.querySelectorAll("[data-row]").forEach((row) => {
 
 // Brand logo wall, grouped by category. Each brand looks for its logo in /logos/<name-slug>.png
 // (then .svg, .webp, .jpg). If no logo file exists yet, the brand name is shown in its place.
+const LOGO_TYPES = ["png", "svg", "webp", "jpg"];
 const LOGO_TYPES = ["png", "svg", "webp", "jpg"];
 const slug = (name) => name.toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const allBrands = Object.values(BRANDS).flat();

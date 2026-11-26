@@ -1,0 +1,304 @@
+/* =====================================================================
+   STYLES FOR THE CREATOR PORTFOLIO
+   Sections in this file:
+   1. Colours (change these to re-theme the site)
+   2. Base + navigation      3. Hero
+   4. Section headings       5. Video phones
+   6. Brands                 7. Gallery
+   8. Workflow               9. Summary box
+   10. Brand insight         11. Banner + Services
+   12. Contact + footer      13. Phone screens (responsive)
+   ===================================================================== */
+
+/* ---------- 1. COLOURS ---------- */
+:root {
+  --bg-a: #ffffff;    /* white sections (1st, 3rd, 5th...) */
+  --bg-b: #f5f2ec;    /* off-white sections (2nd, 4th, 6th...) */
+  --sky: var(--bg-a);
+  --sand: var(--bg-b);
+  --paper: var(--bg-a);
+  --nav: var(--bg-b);
+  --ink: #0f3b3f;     /* main teal text */
+  --navy: #263757;    /* dark blue */
+  --gold: #b8862b;    /* "call" badge */
+  --gold2: #dfb05c;   /* gold heading in Contact */
+  --blue: #3b5283;    /* blue heading in Summary */
+  --ban: #46608c;     /* banner blue */
+  --white: #ffffff;   /* chips and small boxes */
+  /* keep content clear of phone notches */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+/* Dark mode: same names, darker values (used automatically on dark devices) */
+@media (prefers-color-scheme: dark) {
+  :root { --bg-a:#12151a; --bg-b:#1a1f27; --ink:#bfe9e4; --navy:#1b2842; --gold:#c9973a;
+          --gold2:#e3b866; --blue:#9fb4e0; --ban:#263757; --white:#1d2430; }
+}
+
+/* ---------- 2. BASE + NAVIGATION ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+body { margin: 0; background: var(--sky); color: var(--ink); font: 300 1rem "Josefin Sans", system-ui, sans-serif; }
+h1, h2, h3, .disp { font-family: Italiana, Georgia, serif; font-weight: 400; }
+.script { font-family: "Pinyon Script", "Brush Script MT", cursive; }
+section { padding: 48px 20px; text-align: center; }
+/* sections alternate by themselves: 1st white, 2nd off-white, 3rd white... (the blue banner is not a section) */
+section:nth-of-type(odd)  { background: var(--bg-a); }
+section:nth-of-type(even) { background: var(--bg-b); }
+
+nav { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; justify-content: flex-end;
+      gap: 6px 22px; padding: 12px 24px; background: var(--nav); font-size: 13px; font-weight: 600; }
+nav a { color: var(--ink); text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+
+/* ---------- 3. HERO ---------- */
+#home { overflow-x: clip; padding: 40px 20px 24px; }  /* clip stops a sideways scrollbar while the text slides in */
+.hero { display: grid; grid-template-columns: auto 1fr; gap: 60px; max-width: 1300px;
+        margin: 0 auto; align-items: center; text-align: left; }
+.hero-text { display: flex; flex-direction: column; gap: 22px; }
+.arch-wrap { position: relative; width: clamp(260px, calc((100vh - 125px) * .75), 44vw); animation: archFloat 6s ease-in-out 1.4s infinite; }
+
+/* soft outline that pulses behind the photo */
+.arch-wrap::before { content: ""; position: absolute; inset: -14px -14px 0; border: 2px solid var(--ink);
+                     border-radius: 999px 999px 0 0; opacity: .3; animation: ringPulse 3.5s ease-in-out infinite; }
+
+.arch { position: relative; aspect-ratio: 3/4; border-radius: 999px 999px 0 0;
+        background: url("../images/hero.jpg") center 28% / cover;
+        box-shadow: 0 24px 60px rgba(15, 59, 63, .25);
+        animation: archReveal 1.2s cubic-bezier(.2, .8, .2, 1) backwards;
+        transition: transform .4s ease, box-shadow .4s ease; }
+.arch:hover { transform: scale(1.04) rotate(-1deg); box-shadow: 0 34px 80px rgba(15, 59, 63, .35); }
+
+@keyframes archReveal {
+  from { opacity: 0; transform: translateY(40px) scale(.94);
+         clip-path: inset(100% 0 0 0 round 999px 999px 0 0); }
+  to   { opacity: 1; transform: none;
+         clip-path: inset(0 0 0 0 round 999px 999px 0 0); }
+}
+@keyframes archFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes ringPulse { 0%, 100% { transform: scale(1); opacity: .3; } 50% { transform: scale(1.035); opacity: .12; } }
+
+
+/* ---- Step 2: after the photo, the text slides in from the right ---- */
+.nameblob { animation: fromRight 1s cubic-bezier(.2, .8, .2, 1) 1s backwards; }
+.nameblob .script { animation: fromRight .9s cubic-bezier(.2, .8, .2, 1) 1.5s backwards; }
+.nameblob h1      { animation: fromRight .9s cubic-bezier(.2, .8, .2, 1) 1.7s backwards; }
+.nameblob p       { animation: fromRight .9s cubic-bezier(.2, .8, .2, 1) 1.9s backwards; }
+.facts { animation: fadeUp .8s ease 1.6s backwards; }
+.pills { animation: fadeUp .8s ease 2.1s backwards; }
+
+@keyframes fromRight {
+  from { opacity: 0; transform: translateX(160px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch-wrap, .arch, .arch-wrap::before,
+  .nameblob, .nameblob .script, .nameblob h1, .nameblob p, .facts, .pills { animation: none; }
+}
+.facts { font-size: 1.05rem; line-height: 1.5; text-align: center; }
+.nameblob { padding: 30px 40px 50px; text-align: center; background: var(--bg-b);
+            border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%; }
+.nameblob .script { display: block; text-align: left; font-size: 3rem; }
+.nameblob h1 { margin: 0; font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: .95; }
+.nameblob p { margin: 18px 0 0; font-size: .95rem; letter-spacing: .05em; }
+.pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.pill { padding: 10px 36px; border: 2px solid #000; border-radius: 999px; background: #b9cad3; color: #fff;
+        font: 600 1.3rem "Josefin Sans", sans-serif; text-decoration: underline; text-decoration-thickness: 2px; }
+.pill:nth-child(2) { background: #d3d9de; }
+.pill:nth-child(3) { background: #9aa5b1; }
+
+/* ---------- 4. SECTION HEADINGS ---------- */
+.head { position: relative; max-width: 1000px; margin: 0 auto 28px; }
+.head h2 { margin: 0; font-size: 3rem; }
+.head p { margin: 4px 0 0; font-size: 1.15rem; }
+.head .script { font-size: 1.6rem; }
+.mono { position: absolute; left: 0; top: 6px; display: grid; place-items: center; width: 50px; height: 50px;
+        border: 1px solid var(--ink); border-radius: 50%; font: 1.3rem "Pinyon Script", cursive; opacity: .7; }
+.call { position: absolute; right: 0; top: -10px; display: grid; place-items: center; width: 130px; height: 130px;
+        padding: 18px; border: 4px solid var(--sand); border-radius: 50%; outline: 3px solid var(--gold);
+        background: var(--gold); color: #fff; font: 1.25rem/1.15 Italiana, serif; }
+
+/* ---------- 5. VIDEO PHONES (built by main.js) ---------- */
+.phones { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; max-width: 1000px; margin: 0 auto; }
+.phone { width: 150px; }
+.phone h3 { margin: 12px 0 0; font-size: 1.35rem; }
+.phone span { font-size: .9rem; }
+.screen { position: relative; aspect-ratio: 9/19; overflow: hidden; cursor: pointer;
+          border: 6px solid #000; border-radius: 26px; }
+.screen::before { content: ""; position: absolute; top: 0; left: 50%; width: 44%; height: 12px; z-index: 2;
+                  transform: translateX(-50%); background: #000; border-radius: 0 0 10px 10px; }  /* notch */
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+.screen i { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; width: 34px; height: 34px;
+            margin: auto; border-radius: 50%; background: #0008; color: #fff; font-size: 13px; font-style: normal;
+            pointer-events: none; }
+.screen.playing i { display: none; }
+
+/* ---------- 6. BRANDS ---------- */
+.brands { max-width: 1000px; margin: 0 auto; text-align: left; }
+.brands h3 { margin: 26px 0 8px; font-size: 1.9rem; }
+.brands h3 .script { font-size: 1.3rem; }
+.chip { display: inline-block; margin: 4px 6px 4px 0; padding: 6px 14px; border: 1px solid var(--ink);
+        border-radius: 999px; background: var(--white); font-size: .95rem; }
+.chip small { margin-left: 4px; font-size: .72rem; opacity: .65; }
+.chip.intl { background: var(--navy); border-color: var(--navy); color: #fff; }
+.chip.intl::after { content: " · INTERNATIONAL"; font-size: .65rem; letter-spacing: .08em; }
+
+/* ---------- 7. GALLERY (arches over a big word) ---------- */
+.stage { position: relative; max-width: 1200px; margin: 30px auto 0; padding: 40px 0 10px; overflow: hidden; }
+.stage-word { position: absolute; left: 0; right: 0; top: 45%; transform: translateY(-50%); overflow: hidden;
+              font: 700 clamp(2rem, 9.5vw, 8rem)/1 "Josefin Sans", system-ui, sans-serif; letter-spacing: -.02em;
+              text-transform: uppercase; color: var(--ink); pointer-events: none; user-select: none; }
+.marquee { display: flex; width: max-content; animation: wordScroll 18s linear infinite; }
+.marquee span { padding-right: .5em; white-space: nowrap; }
+@keyframes wordScroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
+.stage-row { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: clamp(10px, 2.2vw, 28px); }
+.acard { margin: 0; width: clamp(90px, 17vw, 210px); text-align: center; }
+.acard img { display: block; width: 100%; aspect-ratio: 3 / 4.2; object-fit: cover; border-radius: 999px 999px 0 0;
+             box-shadow: 0 18px 40px rgba(15, 59, 63, .18); transition: transform .5s ease, box-shadow .5s ease; }
+.acard:hover img { transform: translateY(-10px); box-shadow: 0 28px 55px rgba(15, 59, 63, .3); }
+.acard figcaption { margin-top: 12px; font-size: .62rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.more { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; max-width: 1000px; margin: 50px auto 0; }
+.more .acard { width: clamp(120px, 18vw, 180px); }
+
+/* ---------- 8. WORKFLOW ---------- */
+.flow { position: relative; max-width: 900px; margin: 0 auto; padding-right: 90px; text-align: left; }
+.flow h2 { margin: 0 0 20px; padding-bottom: 14px; border-bottom: 1px solid var(--navy); font-size: 3rem; text-align: center; }
+.step { position: relative; margin-bottom: 14px; padding-left: 44px; }
+.step::before { content: ""; position: absolute; left: 0; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--c); }
+.step::after { content: ""; position: absolute; left: 9px; top: 28px; bottom: -22px; width: 2px; background: var(--navy); }
+.step:last-of-type::after { display: none; }
+.step h3 { margin: 0; font-size: 1.7rem; }
+.step p { margin: 0; font-size: 1.05rem; }
+.turn { position: absolute; right: 0; top: 80px; display: grid; place-items: center; width: 48px; height: 150px;
+        padding: 10px 0; border-radius: 30px; background: var(--navy); color: #fff; writing-mode: vertical-rl; }
+.connect { margin-top: 30px; text-align: center; }
+.connect b { display: block; font-size: 1.5rem; }
+.connect a { color: var(--ink); }
+
+/* ---------- 9. SUMMARY BOX ---------- */
+.sum { display: grid; grid-template-columns: 1fr 1.4fr; gap: 30px; max-width: 900px; margin: 0 auto; align-items: center; text-align: left; }
+.sum h2 { margin: 0 0 14px; color: var(--blue); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.photo { aspect-ratio: 3/4; border: 14px solid var(--navy); border-radius: 28px; background: url("../images/framed.jpg") center / cover; }
+.box { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); border-radius: 8px; }
+.box > div { padding: 22px 14px; text-align: center; border-top: 1px solid var(--ink); }
+.box > div:nth-child(even) { border-right: 1px solid var(--ink); }  /* left cells get a divider */
+.box .title { position: relative; grid-column: 1 / -1; padding: 36px 14px 30px; border: 0;
+              font: 1.9rem Italiana, serif; letter-spacing: .04em; }
+.box .title::before { content: ""; position: absolute; inset: 8px 12% 0; border: 3px solid #c9d0d8; border-radius: 50%;
+                      transform: rotate(-4deg); opacity: .8; pointer-events: none; }  /* oval ring */
+.box .title .script { display: inline-block; margin: 0 6px; font-size: 2.6rem; }
+.big { font: clamp(1.5rem, 3.4vw, 2.2rem) Italiana, serif; }
+.box small { display: block; }
+.social { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 18px; }
+.social span { display: block; font-size: .9rem; }
+.icon { display: inline-flex; }
+.icon svg { width: 44px; height: 44px; }
+
+/* ---------- 10. BRAND INSIGHT ---------- */
+.insight { position: relative; max-width: 1000px; margin: 0 auto; padding: 10px 0 60px; border-bottom: 1px solid #cdb9a0; }
+.insight::before { content: ""; position: absolute; left: 12%; top: 60px; bottom: 0; width: 1px; background: #cdb9a0; }
+.insight h2 { margin: 0 0 30px; font-size: clamp(2rem, 5vw, 3rem); }
+.bubrow { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
+.bub, .cmt { text-align: left; color: #fff; font-family: system-ui, sans-serif; }
+.bub { position: relative; max-width: 260px; padding: 14px 16px; border-radius: 16px; background: #454b57; font-size: .9rem; line-height: 1.4; }
+.bub .heart { position: absolute; left: -6px; bottom: -12px; display: grid; place-items: center; width: 26px; height: 26px;
+              border-radius: 50%; background: #232a33; font-size: 12px; }
+.cmt { max-width: 240px; padding: 10px 12px; background: #2a3038; font-size: .78rem; line-height: 1.4; }
+.cmt b { display: block; }
+.donuts { display: flex; flex-wrap: wrap; justify-content: center; gap: 34px; text-align: left; }
+.donut { width: 130px; height: 130px; margin: 0 auto 12px; border-radius: 50%;
+         -webkit-mask: radial-gradient(circle, transparent 38%, #000 39%); mask: radial-gradient(circle, transparent 38%, #000 39%); }
+.legend { font-size: 1rem; line-height: 1.8; }
+.legend b { display: block; color: #a39578; }
+.sq { display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -2px; }
+
+/* ---------- 11. BANNER + SERVICES ---------- */
+.banner { padding: 44px 20px; background: var(--ban); color: #fff; text-align: center; }
+.banner .script { font-size: clamp(2rem, 5vw, 3.4rem); }
+.serv { display: grid; grid-template-columns: 90px 1fr 380px; align-items: center; gap: 10px; max-width: 960px; margin: 0 auto; padding: 30px 10px; }
+.vert { font: 5.5rem/1 Italiana, serif; writing-mode: vertical-rl; transform: rotate(180deg); }
+.list h3 { margin: 0 0 12px; font-size: 2.2rem; }
+.list p { margin: 4px 0; }
+.rates { margin-top: 16px; font-size: 1.5rem; }
+.duo2 { position: relative; width: 340px; height: 500px; margin: 0 auto; }
+.duo2 .phone { position: absolute; width: 175px; }
+.duo2 .back { right: 0; top: 0; }
+.duo2 .front { left: 0; top: 110px; z-index: 2; }
+.inquiries { margin: 0; font-size: 1.7rem; }
+.mail { display: inline-grid; place-items: center; width: 46px; height: 46px; margin-left: 10px; border-radius: 50%;
+        background: #000; color: #fff; font-size: 1.3rem; text-decoration: none; vertical-align: middle; }
+
+/* ---------- 11b. SERVICES PHONES: click-to-swap ---------- */
+.duo2 .phone {
+  transition: left .7s cubic-bezier(.2,.8,.2,1),
+              top .7s cubic-bezier(.2,.8,.2,1),
+              transform .7s cubic-bezier(.2,.8,.2,1),
+              filter .7s ease;
+}
+.duo2 .back {
+  left: 165px; right: auto; top: 0; z-index: 1;   /* 340 (box) - 175 (phone) = 165 */
+  transform: scale(.92);
+  filter: brightness(.75);
+  cursor: pointer;
+}
+.duo2 .front {
+  left: 0; top: 110px; z-index: 2;
+  transform: scale(1);
+  filter: none;
+}
+.duo2 .back:hover { transform: scale(.95) translateY(-6px); filter: brightness(.9); }
+.duo2 .back .screen i { display: none; }   /* no play icon on the back phone */
+@media (prefers-reduced-motion: reduce) { .duo2 .phone { transition: none; } }
+
+/* ---------- 12. CONTACT + FOOTER ---------- */
+.conn { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 20px; max-width: 980px; margin: 0 auto; text-align: left; }
+.conn .mono { top: 0; }
+.conn-text { padding-top: 60px; }
+.conn h2 { margin: 0; color: var(--gold2); font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05; }
+.conn .script { display: block; font-size: clamp(2.6rem, 6vw, 4.4rem); color: var(--gold2); line-height: 1; }
+.icons { display: flex; gap: 16px; margin-top: 24px; }
+.icons a { color: var(--ink); text-decoration: none; }
+.icons .icon svg { width: 44px; height: 44px; }
+.archwrap { display: flex; justify-content: center; }
+.archpic { width: 100%; max-width: 340px; aspect-ratio: 3/4; border-radius: 999px 999px 0 0;
+           background: url("../images/contact.jpg") center / cover; }   /* change to your contact photo */
+footer { padding: 24px 20px; text-align: center; font-size: .85rem; background: var(--bg-a); }
+
+/* ---------- 13. PHONE SCREENS (responsive) ---------- */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 30px; justify-items: center; }
+  .arch-wrap { width: min(70vw, 320px); }
+  .nameblob { padding: 24px 24px 40px; }
+  .sum, .conn { grid-template-columns: 1fr; }
+  .conn-text { padding-top: 70px; text-align: center; }
+  .icons { justify-content: center; }
+  .serv { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .vert { writing-mode: horizontal-tb; transform: none; font-size: 3.5rem; }
+}
+@media (max-width: 600px) {
+  section { padding: 36px 14px; }
+  nav { justify-content: center; padding: 10px 12px; gap: 6px 14px; font-size: 12px; }
+  .head h2 { font-size: 2.2rem; }
+  .mono { display: none; }
+  .call { position: static; margin: 16px auto 0; width: 110px; height: 110px; font-size: 1.05rem; }
+  .phone { width: 135px; }
+  .flow { padding-right: 0; }
+  .turn { display: none; }
+  .stage { padding-top: 24px; }
+  .more { gap: 14px; }
+  .more .acard { width: 42vw; }
+  .pill { padding: 8px 24px; font-size: 1.1rem; }
+  .inquiries { font-size: 1.3rem; }
+
+  /* Services phones, smaller box: 300 wide, phones 150 wide -> back phone left = 150 */
+  .duo2 { width: 300px; height: 440px; }
+  .duo2 .phone { width: 150px; }
+  .duo2 .back { left: 150px; }
+  .duo2 .front { top: 100px; }
+}
