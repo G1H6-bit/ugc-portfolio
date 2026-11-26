@@ -1,0 +1,203 @@
+/* =====================================================================
+   STYLES FOR THE CREATOR PORTFOLIO
+   Sections in this file:
+   1. Colours (change these to re-theme the site)
+   2. Base + navigation      3. Hero
+   4. Section headings       5. Video phones
+   6. Brands                 7. Gallery
+   8. Workflow               9. Summary box
+   10. Brand insight         11. Banner + Services
+   12. Contact + footer      13. Phone screens (responsive)
+   ===================================================================== */
+
+/* ---------- 1. COLOURS ---------- */
+:root {
+  --bg: #e7efe9;      /* ONE calm sage-green background for the whole site (soft on the eyes) */
+  --sky: var(--bg);   /* every section uses the same background colour */
+  --sand: var(--bg);
+  --ink: #0f3b3f;     /* main teal text */
+  --navy: #263757;    /* dark blue */
+  --gold: #b8862b;    /* "call" badge */
+  --gold2: #dfb05c;   /* gold heading in Contact */
+  --blue: #3b5283;    /* blue heading in Summary */
+  --ban: #46608c;     /* banner blue */
+  --white: #ffffff;
+  --paper: var(--bg);
+  --nav: #f3f8f4;     /* menu bar: a touch lighter than the page */
+  /* keep content clear of phone notches */
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- 2. BASE + NAVIGATION ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+body { margin: 0; background: var(--sky); color: var(--ink); font: 300 1rem "Josefin Sans", system-ui, sans-serif; }
+h1, h2, h3, .disp { font-family: Italiana, Georgia, serif; font-weight: 400; }
+.script { font-family: "Pinyon Script", "Brush Script MT", cursive; }
+section { padding: 48px 20px; text-align: center; }
+.band-sky { background: var(--sky); }
+.band-sand { background: var(--sand); }
+.paper { background: var(--paper); }
+
+nav { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: wrap; justify-content: flex-end;
+      gap: 6px 22px; padding: 12px 24px; background: var(--nav); font-size: 13px; font-weight: 600; }
+nav a { color: var(--ink); text-decoration: none; }
+nav a:hover { text-decoration: underline; }
+
+/* ---------- 3. HERO ---------- */
+.hero { display: grid; grid-template-columns: minmax(220px, 300px) 1fr; gap: 30px; max-width: 1000px;
+        margin: 0 auto; align-items: start; text-align: left; }
+.arch { aspect-ratio: 3/4; border-radius: 200px 200px 0 0; background: url("../images/hero.jpg") center 28% / cover; }
+.facts { margin-top: 14px; font-size: 1.05rem; line-height: 1.5; }
+.nameblob { padding: 30px 40px 50px; text-align: center; background: var(--white);
+            border-radius: 60% 40% 55% 45% / 45% 55% 45% 55%; }
+.nameblob .script { display: block; text-align: left; font-size: 3rem; }
+.nameblob h1 { margin: 0; font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: .95; }
+.nameblob p { margin: 18px 0 0; font-size: .95rem; letter-spacing: .05em; }
+.pills { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 10px; }
+.pill { padding: 10px 36px; border: 2px solid #000; border-radius: 999px; background: #b9cad3; color: #fff;
+        font: 600 1.3rem "Josefin Sans", sans-serif; text-decoration: underline; text-decoration-thickness: 2px; }
+.pill:nth-child(2) { background: #d3d9de; }
+.pill:nth-child(3) { background: #9aa5b1; }
+
+/* ---------- 4. SECTION HEADINGS ---------- */
+.head { position: relative; max-width: 1000px; margin: 0 auto 28px; }
+.head h2 { margin: 0; font-size: 3rem; }
+.head p { margin: 4px 0 0; font-size: 1.15rem; }
+.head .script { font-size: 1.6rem; }
+
+/* ---------- 5. VIDEO PHONES (built by main.js) ---------- */
+.phones { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; max-width: 1000px; margin: 0 auto; }
+.phone { width: 150px; }
+.phone h3 { margin: 12px 0 0; font-size: 1.35rem; }
+.phone span { font-size: .9rem; }
+.screen { position: relative; aspect-ratio: 9/19; overflow: hidden; cursor: pointer;
+          border: 6px solid #000; border-radius: 26px; }
+.screen::before { content: ""; position: absolute; top: 0; left: 50%; width: 44%; height: 12px; z-index: 2;
+                  transform: translateX(-50%); background: #000; border-radius: 0 0 10px 10px; }  /* notch */
+.screen video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; }
+.screen i { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; width: 34px; height: 34px;
+            margin: auto; border-radius: 50%; background: #0008; color: #fff; font-size: 13px; font-style: normal;
+            pointer-events: none; }
+.screen.playing i { display: none; }
+
+/* ---------- 6. BRAND LOGOS (no tile: just the logo with its name underneath) ---------- */
+.brands { max-width: 1000px; margin: 0 auto; }
+.brands h3 { margin: 34px 0 14px; font-size: 2rem; }
+.brands h3 .script { font-size: 1.4rem; }
+.logo-wall { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px 26px; }
+.logo { width: 140px; margin: 0; text-align: center; }
+.logo-img { display: grid; place-items: center; height: 72px; }          /* same-height area keeps names lined up */
+.logo img { width: auto; height: auto; max-width: 100%; max-height: 72px; object-fit: contain; }
+.logo-fallback { display: none; font: 1.25rem/1.1 Italiana, serif; }     /* shown only when there is no logo file */
+.logo.no-logo img { display: none; }
+.logo.no-logo .logo-fallback { display: block; }
+.logo.no-logo .cap-name { display: none; }                               /* avoid showing the name twice */
+.logo figcaption { margin-top: 8px; line-height: 1.25; }
+.cap-name { display: block; font: 1.1rem/1.1 Italiana, serif; }
+.logo small { display: block; font-size: .72rem; opacity: .7; }
+.logo small.intl { color: var(--blue); font-weight: 600; letter-spacing: .1em; opacity: 1; }
+
+/* ---------- 7. GALLERY ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; max-width: 1000px; margin: 0 auto; }
+.gallery figure { margin: 0; overflow: hidden; border: 1px solid var(--ink); border-radius: 18px; background: var(--white); }
+.gallery img { display: block; width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+.gallery figcaption { padding: 8px 10px; font-size: .9rem; text-align: center; }
+.gallery .wide { grid-column: span 2; }
+.gallery .wide img { aspect-ratio: 3/2; }
+
+/* ---------- 8. WORKFLOW ---------- */
+.flow { position: relative; max-width: 900px; margin: 0 auto; padding-right: 90px; text-align: left; }
+.flow h2 { margin: 0 0 20px; padding-bottom: 14px; border-bottom: 1px solid var(--navy); font-size: 3rem; text-align: center; }
+.step { position: relative; margin-bottom: 14px; padding-left: 44px; }
+.step::before { content: ""; position: absolute; left: 0; top: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--c); }
+.step::after { content: ""; position: absolute; left: 9px; top: 28px; bottom: -22px; width: 2px; background: var(--navy); }
+.step:last-of-type::after { display: none; }
+.step h3 { margin: 0; font-size: 1.7rem; }
+.step p { margin: 0; font-size: 1.05rem; }
+.turn { position: absolute; right: 0; top: 80px; display: grid; place-items: center; width: 48px; height: 150px;
+        padding: 10px 0; border-radius: 30px; background: var(--navy); color: #fff; writing-mode: vertical-rl; }
+.connect { margin-top: 30px; text-align: center; }
+.connect b { display: block; font-size: 1.5rem; }
+.connect a { color: var(--ink); }
+
+/* ---------- 9. SUMMARY BOX ---------- */
+.sum { display: grid; grid-template-columns: 1fr 1.4fr; gap: 30px; max-width: 900px; margin: 0 auto; align-items: center; text-align: left; }
+.sum h2 { margin: 0 0 14px; color: var(--blue); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; }
+.photo { aspect-ratio: 3/4; border: 14px solid var(--navy); border-radius: 28px; background: url("../images/framed.jpg") center / cover; }
+.box { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--ink); border-radius: 8px; }
+.box > div { padding: 22px 14px; text-align: center; border-top: 1px solid var(--ink); }
+.box > div:nth-child(even) { border-right: 1px solid var(--ink); }  /* left cells get a divider */
+.box .title { position: relative; grid-column: 1 / -1; padding: 36px 14px 30px; border: 0;
+              font: 1.9rem Italiana, serif; letter-spacing: .04em; }
+.box .title::before { content: ""; position: absolute; inset: 8px 12% 0; border: 3px solid #c9d0d8; border-radius: 50%;
+                      transform: rotate(-4deg); opacity: .8; pointer-events: none; }  /* oval ring */
+.box .title .script { display: inline-block; margin: 0 6px; font-size: 2.6rem; }
+.big { font: clamp(1.5rem, 3.4vw, 2.2rem) Italiana, serif; }
+.box small { display: block; }
+.social { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-end; gap: 18px; }
+.social span { display: block; font-size: .9rem; }
+.icon { display: inline-flex; }
+.icon svg { width: 44px; height: 44px; }
+
+/* ---------- 10. BRAND INSIGHT ---------- */
+.insight { position: relative; max-width: 1000px; margin: 0 auto; padding: 10px 0 60px; border-bottom: 1px solid #cdb9a0; }
+.insight::before { content: ""; position: absolute; left: 12%; top: 60px; bottom: 0; width: 1px; background: #cdb9a0; }
+.insight h2 { margin: 0 0 30px; font-size: clamp(2rem, 5vw, 3rem); }
+.bubrow { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 22px; }
+.bub, .cmt { text-align: left; color: #fff; font-family: system-ui, sans-serif; }
+.bub { position: relative; max-width: 260px; padding: 14px 16px; border-radius: 16px; background: #454b57; font-size: .9rem; line-height: 1.4; }
+.bub .heart { position: absolute; left: -6px; bottom: -12px; display: grid; place-items: center; width: 26px; height: 26px;
+              border-radius: 50%; background: #232a33; font-size: 12px; }
+.cmt { max-width: 240px; padding: 10px 12px; background: #2a3038; font-size: .78rem; line-height: 1.4; }
+.cmt b { display: block; }
+.donuts { display: flex; flex-wrap: wrap; justify-content: center; gap: 34px; text-align: left; }
+.donut { width: 130px; height: 130px; margin: 0 auto 12px; border-radius: 50%;
+         -webkit-mask: radial-gradient(circle, transparent 38%, #000 39%); mask: radial-gradient(circle, transparent 38%, #000 39%); }
+.legend { font-size: 1rem; line-height: 1.8; }
+.legend b { display: block; color: #a39578; }
+.sq { display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -2px; }
+
+/* ---------- 11. BANNER + SERVICES ---------- */
+.banner { padding: 44px 20px; background: var(--ban); color: #fff; text-align: center; }
+.banner .script { font-size: clamp(2rem, 5vw, 3.4rem); }
+.serv { display: grid; grid-template-columns: 90px 1fr 380px; align-items: center; gap: 10px; max-width: 960px; margin: 0 auto; padding: 30px 10px; }
+.vert { font: 5.5rem/1 Italiana, serif; writing-mode: vertical-rl; transform: rotate(180deg); }
+.list h3 { margin: 0 0 12px; font-size: 2.2rem; }
+.list p { margin: 4px 0; }
+.rates { margin-top: 16px; font-size: 1.5rem; }
+.duo2 { position: relative; width: 340px; height: 500px; margin: 0 auto; }
+.duo2 .phone { position: absolute; width: 175px; }
+.duo2 .back { right: 0; top: 0; }
+.duo2 .front { left: 0; top: 110px; z-index: 2; }
+.inquiries { margin: 0; font-size: 1.7rem; }
+.mail { display: inline-grid; place-items: center; width: 46px; height: 46px; margin-left: 10px; border-radius: 50%;
+        background: #000; color: #fff; font-size: 1.3rem; text-decoration: none; vertical-align: middle; }
+
+/* ---------- 12. CONTACT + FOOTER ---------- */
+.conn { position: relative; display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 20px; max-width: 980px; margin: 0 auto; text-align: left; }
+.conn-text { padding-top: 0; }
+.conn h2 { margin: 0; color: var(--gold2); font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.05; }
+.conn .script { display: block; font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: 1; }
+.icons { display: flex; align-items: center; gap: 16px; margin-top: 34px; color: var(--ink); }
+.icons a { display: inline-flex; color: inherit; }
+.archwrap { position: relative; justify-self: end; width: 100%; max-width: 360px; padding-left: 60px; }
+.archwrap::before { content: ""; position: absolute; left: 0; bottom: 0; width: 62%; height: 62%; border-radius: 200px 200px 0 0; background: var(--ban); }
+.archpic { position: relative; aspect-ratio: 3/4.4; border-radius: 200px 200px 0 0; background: url("../images/gallery-5.jpg") center 30% / cover; }
+footer { padding: 30px; font-size: .85rem; text-align: center; }
+.replay { margin-left: 12px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; opacity: .6; text-decoration: underline; cursor: pointer; }
+
+/* ---------- 13. SMALL SCREENS ---------- */
+@media (max-width: 760px) {
+  .hero, .sum, .serv, .conn { grid-template-columns: 1fr; }
+  .arch { max-width: 240px; margin: 0 auto; }
+  .flow { padding-right: 0; }
+  .turn { position: static; width: auto; height: auto; margin: 14px auto 0; padding: 8px 18px; writing-mode: horizontal-tb; }
+  .vert { font-size: 3.2rem; writing-mode: horizontal-tb; transform: none; }
+  .duo2 { width: 320px; height: 470px; }
+  .archwrap { justify-self: center; }
+  .insight::before { display: none; }
+  .bubrow { justify-content: center; }
+}
+@media (max-width: 520px) { .gallery { grid-template-columns: 1fr 1fr; } }

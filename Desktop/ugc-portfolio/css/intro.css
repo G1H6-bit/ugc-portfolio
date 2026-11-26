@@ -1,0 +1,106 @@
+/* =====================================================================
+   INTRO ANIMATION (3D phone + turning ring of videos + social icons)
+   - It is hidden unless <html> has the class "intro-on" (set by js/intro-gate.js)
+   - Everything animates only while the intro has the class "run" (set by js/intro.js)
+   - All class names start with "i-" so they never clash with the rest of the site
+   ===================================================================== */
+.intro{display:none}
+.intro-on .intro{display:block}
+html.intro-on,html.intro-on body{overflow:hidden;height:100%}
+.intro:not(.run) .i-scene,.intro:not(.run) .i-hero{visibility:hidden}   /* nothing flashes before the script starts */
+.intro{position:fixed;inset:0;z-index:100;overflow:hidden;color:#fff;--pink:#ff5fa2;--gold:#ffc44d;--teal:#3de0cf;
+  background:radial-gradient(1100px 700px at 50% 42%,#3a2a6e 0%,#1a2147 48%,#090c1b 100%);--R:440px}
+.intro.gone{display:none!important}
+.i-glow{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(90px);opacity:.35}
+.i-g1{left:-12vmax;top:-10vmax;background:var(--pink)} .i-g2{right:-14vmax;bottom:-14vmax;background:var(--teal)}
+.run .i-g1{animation:drift1 9s ease-in-out infinite alternate} .run .i-g2{animation:drift1 11s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(6vmax,5vmax) scale(1.15)}}
+
+/* --- Step 1: camera countdown 3 / 2 / 1 with a REC light --- */
+.i-count{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.run .i-count{animation:vanish .2s 2.05s forwards} @keyframes vanish{to{opacity:0;visibility:hidden}}
+.i-count i{position:absolute;width:44px;height:44px;border:4px solid #fff;opacity:.85}
+.i-count i:nth-of-type(1){left:7vw;top:9vh;border-right:0;border-bottom:0} .i-count i:nth-of-type(2){right:7vw;top:9vh;border-left:0;border-bottom:0}
+.i-count i:nth-of-type(3){left:7vw;bottom:9vh;border-right:0;border-top:0} .i-count i:nth-of-type(4){right:7vw;bottom:9vh;border-left:0;border-top:0}
+.i-rec{position:absolute;left:calc(7vw + 6px);top:calc(9vh + 56px);font:600 .9rem system-ui,sans-serif;letter-spacing:.14em;display:flex;gap:8px;align-items:center}
+.i-rec b{width:11px;height:11px;border-radius:50%;background:#ff3b5c}
+.run .i-rec b{animation:blink .7s steps(2) infinite} @keyframes blink{50%{opacity:0}}
+.i-num{position:absolute;font:400 clamp(7rem,28vmin,16rem) Italiana,serif;opacity:0;text-shadow:0 0 40px #ff5fa288}
+.run .i-num{animation:num .7s ease-out both} .run .i-n2{animation-delay:.7s} .run .i-n1{animation-delay:1.4s}
+@keyframes num{0%{opacity:0;transform:scale(1.9)}25%{opacity:1;transform:scale(1)}80%{opacity:1}100%{opacity:0;transform:scale(.6)}}
+.i-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.run .i-flash{animation:flash .7s 2.1s ease-out} @keyframes flash{0%{opacity:0}12%{opacity:.95}100%{opacity:0}}
+
+/* --- Step 2: the 3D scene --- */
+.i-scene{position:absolute;inset:0;transition:transform 1s cubic-bezier(.7,0,.9,.4),opacity .7s .25s}
+/* THREE separate 3D layers with the same camera: back cards, the phone, front cards.
+   Because they are stacked like sheets of glass, a card can never slice into the phone. */
+.i-layer{position:absolute;inset:0;display:grid;place-items:center;padding-bottom:32vh;perspective:1500px;perspective-origin:50% 42%;pointer-events:none}
+.i-layer.back{z-index:1} .i-layer.mid{z-index:2} .i-layer.front{z-index:3}
+.run .i-scene{animation:sceneIn .01s 2.1s both} @keyframes sceneIn{from{opacity:0}to{opacity:1}}
+.i-tilt,.i-stage,.i-rw,.i-phoneWrap,.i-phone,.i-parts{transform-style:preserve-3d}
+.i-tilt{transition:transform .3s ease-out;transform:rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg))}
+.i-stage{transform:scale(var(--s,1));position:relative;width:0;height:0}
+
+/* the phone: front screen plus four edges make a real 3D body (no separate back plate: it caused a rendering glitch next to the ring) */
+.i-phoneWrap{position:absolute;left:0;top:-20px}
+.run .i-phoneWrap{animation:phoneIn 1.9s cubic-bezier(.2,.9,.25,1) 2.1s both}
+@keyframes phoneIn{from{transform:translateZ(-2200px) rotateY(620deg) scale(.5)}to{transform:none}}
+.i-phone{position:absolute;left:0;top:0;width:0;height:0}
+.run .i-phone{animation:swing 8s ease-in-out 4s infinite alternate} @keyframes swing{from{transform:rotateY(-24deg) rotateX(4deg)}to{transform:rotateY(24deg) rotateX(-3deg) translateY(-12px)}}
+.i-f{position:absolute;left:0;top:0}
+.i-pf{width:250px;height:520px;border-radius:40px;background:#08080b;padding:11px;transform:translate(-50%,-50%) translateZ(14px);box-shadow:0 0 60px #ff5fa244}
+.i-pl,.i-pr{width:28px;height:470px;background:linear-gradient(#5a5f85,#1a1d33,#5a5f85)}
+.i-pl{transform:translate(-50%,-50%) rotateY(-90deg) translateZ(125px)} .i-pr{transform:translate(-50%,-50%) rotateY(90deg) translateZ(125px)}
+.i-pt,.i-pbm{width:200px;height:28px;background:linear-gradient(90deg,#5a5f85,#1a1d33,#5a5f85)}
+.i-pt{transform:translate(-50%,-50%) rotateX(90deg) translateZ(260px)} .i-pbm{transform:translate(-50%,-50%) rotateX(-90deg) translateZ(260px)}
+.i-screen{position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;background:#111}
+.i-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.i-screen::before{content:"";position:absolute;top:9px;left:50%;width:76px;height:20px;margin-left:-38px;border-radius:12px;background:#000;z-index:4}
+.i-screen::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(115deg,transparent 35%,#ffffff40 50%,transparent 65%);transform:translateX(-120%)}
+.run .i-screen::after{animation:glare 4.5s 4.2s ease-in-out infinite} @keyframes glare{60%,100%{transform:translateX(120%)}}
+.i-ui{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:42px 14px 16px;background:linear-gradient(#0000 55%,#000b);font:600 .62rem system-ui,sans-serif;letter-spacing:.08em}
+.i-ui .i-tp{display:flex;justify-content:space-between}
+.i-ui .i-tp span{background:#0008;padding:4px 9px;border-radius:99px;display:flex;gap:6px;align-items:center} .i-ui .i-tp span:last-child{background:linear-gradient(90deg,var(--pink),var(--gold));color:#2a1200}
+.i-ui .i-tp b{width:7px;height:7px;border-radius:50%;background:#ff3b5c} .run .i-ui .i-tp b{animation:blink .9s steps(2) infinite}
+.i-ui .i-side{position:absolute;right:12px;bottom:70px;display:grid;gap:10px}
+.i-ui .i-side svg{width:30px;height:30px;padding:7px;border-radius:50%;background:#0007;fill:#fff} .i-ui .i-side svg:first-child{fill:#ff3b5c}
+.i-ui h4{margin:0;font:400 1.15rem Italiana,serif;letter-spacing:0} .i-ui small{display:block;opacity:.85;font-weight:400;margin:2px 0 8px}
+.i-bar{height:3px;background:#fff4;border-radius:2px;overflow:hidden} .i-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold))}
+.run .i-bar i{animation:fill 9s linear infinite} @keyframes fill{to{width:100%}}
+
+/* the ring of video cards turning around the phone */
+.i-rw{position:absolute;left:0;top:0;transform:rotateX(-16deg)}   /* the tilted ring; cards and icons are placed by script each frame */
+.i-c3d{position:absolute;left:-60px;top:-107px;width:120px;height:214px;border-radius:14px;border:3px solid #fff;background-size:cover;background-position:center;
+  box-shadow:0 12px 30px #0008;opacity:0;backface-visibility:visible}
+/* small social icons that circle the phone on their own ring */
+.i-ico{position:absolute;left:-21px;top:-21px;width:42px;height:42px;border-radius:13px;display:grid;place-items:center;opacity:0;
+  background:#ffffff26;border:1.5px solid #ffffffb0;box-shadow:0 0 16px #ff5fa299,inset 0 0 8px #ffffff55}
+.i-ico svg{width:22px;height:22px;fill:#fff}
+.i-ico.ig{box-shadow:0 0 16px #ffc44d99,inset 0 0 8px #ffffff55}
+
+/* floating UGC symbols: hearts, stars, play, chat, sparkles */
+.i-parts{position:absolute;left:0;top:0}
+.i-p{position:absolute;left:0;top:0;opacity:0;filter:drop-shadow(0 0 10px currentColor)}
+.run .i-p{animation:pop .7s ease-out var(--d) both,bob var(--t) ease-in-out var(--d) infinite alternate} @keyframes pop{from{opacity:0;scale:0}to{opacity:1;scale:1}}
+@keyframes bob{from{translate:0 -14px}to{translate:0 14px}}
+.i-p svg{display:block;width:var(--w);height:var(--w);fill:currentColor}
+
+/* --- Step 3: title and enter button --- */
+.i-hero{position:absolute;left:0;right:0;bottom:calc(5vh + env(safe-area-inset-bottom,0px));text-align:center;z-index:6;padding:0 16px;text-shadow:0 2px 24px #000a}
+.i-hero .i-hi{display:block;font:clamp(1.8rem,5vw,2.6rem) "Pinyon Script",cursive} .i-hero h2{margin:0;font:400 clamp(2.4rem,8vw,4.6rem)/1 Italiana,Georgia,serif;letter-spacing:.02em}
+.i-hero p{margin:8px 0 16px;font-size:clamp(.8rem,2.4vw,1rem);letter-spacing:.2em;text-transform:uppercase}
+.i-hero>*{opacity:0} .run .i-hero>*{animation:up .8s ease-out both}
+.run .i-hero .i-hi{animation-delay:3.7s} .run .i-hero h2{animation-delay:3.9s} .run .i-hero p{animation-delay:4.2s} .run .i-hero button{animation-delay:4.6s}
+@keyframes up{from{opacity:0;transform:translateY(24px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+#enter{padding:13px 34px;border:0;border-radius:99px;background:linear-gradient(90deg,var(--pink),var(--gold));color:#2a1200;font:600 1rem "Josefin Sans",sans-serif;letter-spacing:.06em;cursor:pointer;text-shadow:none}
+.run #enter{animation:up .8s 4.6s ease-out both,beat 1.8s 5.5s ease-in-out infinite} @keyframes beat{50%{transform:scale(1.07);box-shadow:0 0 34px #ff5fa2aa}}
+#skip{position:absolute;right:16px;top:calc(14px + env(safe-area-inset-top,0px));z-index:8;background:#0006;color:#fff;border:1px solid #fff5;border-radius:99px;padding:7px 16px;font:600 .8rem "Josefin Sans",sans-serif;cursor:pointer}
+
+/* --- Leaving: zoom through the phone screen --- */
+.leaving .i-scene{transform:scale(9);opacity:0} .leaving .i-hero,.leaving #skip{opacity:0;transition:opacity .3s}
+.leaving{animation:out .5s .7s forwards} @keyframes out{to{opacity:0}}
+
+/* Reduced motion: no countdown, no spinning, show the finished scene */
+@media(prefers-reduced-motion:reduce){.intro *{animation:none!important;transition:none!important}.i-count,.i-flash{display:none}.i-p,.i-hero>*{opacity:1!important}}
+@media(max-width:700px){.intro{--R:330px}}
